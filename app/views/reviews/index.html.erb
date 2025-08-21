@@ -1,16 +1,22 @@
-<p style="color: green"><%= notice %></p>
+<div class="page">
+  <h1 class="title">ショコラレビュー</h1>
+  <div class="top-actions">
+    <%= link_to "新規投稿", new_review_path, class: "btn" %>
+  </div>
 
-<% content_for :title, "Reviews" %>
-
-<h1>Reviews</h1>
-
-<div id="reviews">
-  <% @reviews.each do |review| %>
-    <%= render review %>
-    <p>
-      <%= link_to "Show this review", review %>
-    </p>
-  <% end %>
+  <div class="grid">
+    <% @reviews.each do |r| %>
+      <article class="card">
+        <h2 class="card-title"><%= r.title %></h2>
+        <p class="muted">著者：<%= r.author %></p>
+        <p class="stars"><%= "★" * r.rating %><%= "☆" * (5 - r.rating.to_i) %></p>
+        <p class="body"><%= truncate(r.body, length: 120) %></p>
+        <div class="card-actions">
+          <%= link_to "詳細", r, class: "btn ghost" %>
+          <%= link_to "編集", edit_review_path(r), class: "btn ghost" %>
+          <%= link_to "削除", r, data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "btn danger" %>
+        </div>
+      </article>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New review", new_review_path %>
