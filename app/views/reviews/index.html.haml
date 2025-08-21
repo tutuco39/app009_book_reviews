@@ -1,0 +1,18 @@
+.page
+  %h1.title book review
+  .top-actions
+    = link_to "新規投稿", new_review_path, class: "btn"
+  .grid
+    - @reviews.each do |r|
+      %article.card
+        %h2.card-title= r.title
+        %p.muted
+          著者：#{r.author}
+        %p.stars
+          = "★" * r.rating
+          = "☆" * (5 - r.rating.to_i)
+        %p.body= truncate(r.body, length: 120)
+        .card-actions
+          = link_to "詳細", r, class: "btn ghost"
+          = link_to "編集", edit_review_path(r), class: "btn ghost"
+          = link_to "削除", r, data: { turbo_method: :delete, turbo_confirm: "削除しますか？" }, class: "btn danger"

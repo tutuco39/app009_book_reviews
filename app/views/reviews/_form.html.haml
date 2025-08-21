@@ -1,0 +1,17 @@
+= form_with(model: review, class: "card") do |f|
+  - if review.errors.any?
+    .alert= review.errors.full_messages.to_sentence
+  .field
+    = f.label :title, "本のタイトル"
+    = f.text_field :title
+  .field
+    = f.label :author, "著者"
+    = f.text_field :author
+  .field
+    = f.label :body, "感想"
+    = f.text_area :body, rows: 6
+  .field
+    = f.label :rating, "星評価"
+    = f.select :rating, options_for_select((1..5).map{|n| [("★" * n) + ("☆" * (5-n)), n]}, review.rating)
+  .actions
+    = f.submit

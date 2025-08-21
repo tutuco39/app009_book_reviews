@@ -1,0 +1,32 @@
+.page
+  %article.card
+    %h1.card-title= @review.title
+    %p.muted
+      著者：#{@review.author}
+    %p.stars.big
+      = "★" * @review.rating
+      = "☆" * (5 - @review.rating)
+    %p.body= simple_format(@review.body)
+    .card-actions
+      = link_to "編集", edit_review_path(@review), class: "btn ghost"
+      = link_to "一覧へ戻る", reviews_path, class: "btn"
+  %section.card
+    %h2.card-title
+      コメント（#{@review.comments.count}）
+    - @review.comments.order(created_at: :desc).each do |c|
+      .comment
+        .comment-head
+          %strong= c.name
+          %span.muted= l c.created_at, format: :short
+        %p= simple_format(c.body)
+        = button_to "削除", review_comment_path(@review, c),              |
+          method: :delete, form: { data: { turbo_confirm: "削除しますか？" }}, |
+          class: "btn danger small"                                     |
+    = form_with(model: [@review, Comment.new], class: "comment-form") do |f|
+      .field-inline
+        = f.label :name, "名前"
+        = f.text_field :name
+      .field
+        = f.label :body, "コメント"
+        = f.text_area :body, rows: 3
+      = f.submit "投稿する", class: "btn"
