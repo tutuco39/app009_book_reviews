@@ -1,0 +1,6 @@
+- content_for :title, "New review"
+%h1 New review
+= render "form", review: @review
+%br/
+%div
+  = link_to "Back to reviews", reviews_path
