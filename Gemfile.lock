@@ -106,6 +106,8 @@ GEM
       html2haml
     erubi (1.13.1)
     erubis (2.7.0)
+    faker (3.5.2)
+      i18n (>= 1.8.11, < 2)
     globalid (1.2.1)
       activesupport (>= 6.1)
     haml (6.3.0)
@@ -319,6 +321,7 @@ DEPENDENCIES
   capybara
   debug
   erb2haml
+  faker
   haml-rails (~> 2.1)
   importmap-rails
   jbuilder
