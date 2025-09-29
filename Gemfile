@@ -50,7 +50,7 @@ group :development do
   gem "web-console"
   gem 'erb2haml'
   gem 'faker'
-  gem 'haml-rails', '~> 2.1'
+  gem 'haml-rails', '~> 3.0'
 end
 
 group :test do
